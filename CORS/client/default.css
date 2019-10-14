@@ -1,0 +1,12 @@
+iframe { 
+    width: 40%;
+    margin: 10px
+}
+
+div {
+    padding: 10px
+}
+
+.yellow {
+    background-color: yellow
+}

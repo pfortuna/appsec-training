@@ -1,0 +1,63 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="default.css" />
+		<script type="text/javascript" src="utils.js"></script>
+	</head>
+	<body>
+		<div>
+			<label for="username"><b>Username:</b></label>
+			<input type="text" placeholder="Enter Username" name="username">
+		</div>
+		<div>
+			<label for="password"><b>Password:</b></label>
+			<input type="password" placeholder="Enter Password" name="password">
+		</div>
+		<div>
+			<button id=b1 type="button">Login</button>
+		</div>
+		<div>
+			<label for="userid"><b>User ID:</b></label>
+			<input type="userid" placeholder="User ID" name="userid">
+			<button id=b2 type="button">Delete User</button>
+		</div>
+
+		<script>
+				appendUrlHeader(2);
+
+				document.querySelector('#b1').addEventListener('click', function() {
+					let xhr = new XMLHttpRequest();
+					xhr.open('POST', 'http://bar.com:3000/auth/');
+					xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+					xhr.onload = () => alert(xhr.response);
+					xhr.onerror = () => alert("Error! CORS blocked?");
+					let username = document.querySelector('input[name=username]').value;
+					let password = document.querySelector('input[name=password]').value;
+					xhr.send(`username=${username}&password=${password}`);
+				});
+
+				document.querySelector('#b2').addEventListener('click', function() {
+					let xhr = new XMLHttpRequest();
+					let url = 'http://bar.com:3000/delete/' + 
+							  document.querySelector('input[name=userid]').value;
+					xhr.open('DELETE', url);
+					xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+					xhr.onload = () => console.log(xhr.response);
+					xhr.onerror = () => alert("Error! CORS blocked?");
+					xhr.send();
+				});
+
+				/*
+				document.querySelector('#b3').addEventListener('click', function() {
+					let script = document.createElement('script');
+					let callback = document.querySelector('#cb').value;
+                    script.src = `http://bar.com:3000/weather.json?callback=${callback}`;
+                    document.body.append(script);
+				});
+
+				function gotWeather({ temperature, humidity }) {
+					document.querySelector('#ta').value += `temperature: ${temperature}, humidity: ${humidity}\n`;
+				}
+				*/
+		</script>
+	</body>
+</html>

@@ -1,0 +1,1 @@
+console.log("this is s3.js script loaded from foo.com:3000!");

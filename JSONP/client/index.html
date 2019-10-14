@@ -1,0 +1,46 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="default.css" />
+		<script type="text/javascript" src="utils.js"></script>
+	</head>
+	<body>
+		<textarea id=ta readonly></textarea>
+		<br />
+		<p><input type=button id=b1 value='Request JSON'> 
+		<input type=button id=b2 value='Request JSONP'></p>
+		<p><input type=callback id=cb value="gotWeather" />
+		<input type=button id=b3 value='Request JSONP with custom callback name'></p>
+
+		<script>
+				appendUrlHeader(2, "http://foo.com/");
+
+				document.querySelector('#b1').addEventListener('click', function() {
+					let xhr = new XMLHttpRequest();
+					xhr.open('GET', 'http://bar.com:3000/weather-raw.json?callback=gotWeather');
+					xhr.onload = function() { 
+						document.querySelector('#ta').value += xhr.response + "\n";
+					}
+					xhr.onerror = function(e) {
+						document.querySelector('#ta').value += "Error! CORS blocked?\n";
+					}
+					xhr.send();
+				});
+				document.querySelector('#b2').addEventListener('click', function() {
+					let script = document.createElement('script');
+                    script.src = 'http://bar.com:3000/weather.json?callback=gotWeather';
+                    document.body.append(script);
+				});
+
+				document.querySelector('#b3').addEventListener('click', function() {
+					let script = document.createElement('script');
+					let callback = document.querySelector('#cb').value;
+                    script.src = `http://bar.com:3000/weather.json?callback=${callback}`;
+                    document.body.append(script);
+				});
+
+				function gotWeather({ temperature, humidity }) {
+					document.querySelector('#ta').value += `temperature: ${temperature}, humidity: ${humidity}\n`;
+                }
+		</script>
+	</body>
+</html>
