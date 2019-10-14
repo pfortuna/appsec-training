@@ -4,9 +4,8 @@ We'll need `Node.js` and `npm` installed on your systems:
 * Node.js  - version 10.15.3 or later. Get it here [1]
 * npm - version 6.4.1 or later. Get it here [2]
 
-After installing npm, please install the following packages:
-```npm i -g http-server
-```
+After installing npm, please install this package: 
+```npm i -g http-server```
 
 ## OWASP Juice Shop
 We'll also need `OWASP Juice Shop` [3]. Please go here [4] for installation instructions. 
@@ -24,7 +23,3 @@ The `OWASP Juice Shop` interface should be accessible by pointing your browser t
 2. https://www.npmjs.com/get-npm
 3. https://www.owasp.org/index.php/OWASP_Juice_Shop_Project
 4. https://github.com/bkimminich/juice-shop#setup
-
-
-
-
